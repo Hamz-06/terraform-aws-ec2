@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 6.17.0"
     }
   }
 
@@ -23,7 +23,7 @@ module "vpc" {
   enable_nat_gateway = var.enable_nat_gateway
   single_nat_gateway = var.single_nat_gateway
   tags               = var.tags
-  cidr_block = var.vpc_cidr
+  cidr = var.vpc_cidr
 }
 
 module "ec2_instance" {
