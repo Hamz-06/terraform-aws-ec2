@@ -24,17 +24,7 @@ variable "private_subnets" {
   type        = list(string)
 }
 
-variable "enable_nat_gateway" {
-  description = "Whether to create NAT Gateways"
-  type        = bool
-  default     = false
-}
 
-variable "single_nat_gateway" {
-  description = "Whether to use a single NAT Gateway across all AZs"
-  type        = bool
-  default     = true
-}
 
 variable "tags" {
   description = "Tags to apply to all resources"
