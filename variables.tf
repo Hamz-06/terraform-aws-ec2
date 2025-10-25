@@ -67,3 +67,25 @@ variable "key_name" {
   type        = string
   default     = ""
 }
+
+variable "associate_public_ip_address" {
+  description = "Whether to associate a public IP address with the EC2 instance."
+  type        = bool
+  default     = true
+}
+
+variable "security_group_ingress_rules" {
+  description = "Map of security group ingress rules to apply to the EC2 instance."
+  type = map(object({
+    cidr_ipv4                    = optional(string)
+    cidr_ipv6                    = optional(string)
+    description                  = optional(string)
+    from_port                    = optional(number)
+    ip_protocol                  = optional(string, "tcp")
+    prefix_list_id               = optional(string)
+    referenced_security_group_id = optional(string)
+    tags                         = optional(map(string), {})
+    to_port                      = optional(number)
+  }))
+  default = {}
+}

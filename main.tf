@@ -25,13 +25,16 @@ module "vpc" {
 module "ec2_instance" {
   source = "./modules/ec2"
 
-  name               = var.instance_name
-  ami                = var.ami_id
-  instance_type      = var.instance_type
-  subnet_id          = module.vpc.public_subnets[0]
-  security_group_ids = [module.vpc.default_security_group_id]
-  key_name           = var.key_name
-  tags               = var.tags
+  name                        = var.instance_name
+  ami                         = var.ami_id
+  instance_type               = var.instance_type
+  subnet_id                   = module.vpc.public_subnets[0]
+  security_group_ids          = [module.vpc.default_security_group_id]
+  associate_public_ip_address = var.associate_public_ip_address
+  security_group_ingress_rules = var.security_group_ingress_rules
+
+  key_name                    = var.key_name
+  tags                        = var.tags
 
   depends_on = [module.vpc]
 }
