@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v1.0.2...v1.1.0) (2025-10-25)
+
+
+### Features
+
+* **tf:** add associate public ip + security group ingress ([010eabc](https://github.com/Hamz-06/terraform-aws-ec2/commit/010eabcb0db3a238fc4cd22dd8b2f1386b046b02))
+
 ## [1.0.2](https://github.com/Hamz-06/terraform-aws-ec2/compare/v1.0.1...v1.0.2) (2025-10-24)
 
 
