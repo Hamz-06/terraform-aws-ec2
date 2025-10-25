@@ -1,6 +1,5 @@
-sooon
-
 Helper commit messages:
+
 
 | Commit Message                 | Effect   | Example                                      |
 | ------------------------------ | -------- | -------------------------------------------- |
