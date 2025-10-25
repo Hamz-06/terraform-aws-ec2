@@ -41,7 +41,7 @@ variable "single_nat_gateway" {
 }
 
 variable "tags" {
-  description = "A map of tags to apply to all resources (e.g., { Environment = \"dev\" })."
+  description = "A map of tags to apply to all resources (e.g., { ttl = \"200\" })."
   type        = map(string)
   default     = {}
 }
@@ -62,8 +62,29 @@ variable "instance_type" {
   default     = "t3.micro"
 }
 
-variable "key_name" {
-  description = "The name of the AWS key pair to associate with the EC2 instance for SSH access."
+variable "ec2_key_name" {
+  description = "the name of the ec2 key pair to use"
   type        = string
-  default     = ""
+  default     = null
+}
+
+# GLOBAL variables REQUIRED
+variable "environment" {
+  description = "The deployment environment (e.g., dev, prod)."
+  type        = string
+
+  validation {
+    condition     = contains(["dev", "prod"], var.environment)
+    error_message = "Environment must be one of: dev, prod."
+  }
+}
+
+variable "application_name" {
+  description = "The name of the application being deployed."
+  type        = string
+
+  validation {
+    condition     = length(var.application_name) >= 2 && length(var.application_name) <= 30
+    error_message = "Project name must be between 2 and 30 characters long."
+  }
 }
