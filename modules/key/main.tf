@@ -8,11 +8,11 @@ module "aws_key_pair" {
 
   key_name   = var.key_name
   public_key = trimspace(tls_private_key.this.public_key_openssh)
-  
+
   tags = var.tags
 }
 
 output "key_name" {
-  value = module.aws_key_pair.key_pair_name
+  value       = module.aws_key_pair.key_pair_name
   description = "The name of the created AWS key pair"
 }
