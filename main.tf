@@ -34,8 +34,6 @@ module "vpc" {
 
 module "ec2_key" {
   source = "./modules/key"
-
-  create   = local.create_new_key
   key_name = "${local.name}_key"
 
   tags = merge(local.required_tags, {
