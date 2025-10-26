@@ -1,4 +1,4 @@
-variable "name" {
+variable "instance_name" {
   description = "Name for the EC2 instance"
   type        = string
 }
@@ -33,12 +33,6 @@ variable "associate_public_ip_address" {
   description = "Whether to associate a public IP address"
   type        = bool
   default     = true
-}
-
-variable "monitoring" {
-  description = "Enable detailed monitoring"
-  type        = bool
-  default     = false
 }
 
 variable "security_group_ingress_rules" {
