@@ -8,3 +8,9 @@ variable "key_name" {
   description = "Name of the key pair"
   type        = string
 }
+
+variable "create" {
+  description = "Determines whether resources will be created"
+  type        = bool
+  default     = true
+}

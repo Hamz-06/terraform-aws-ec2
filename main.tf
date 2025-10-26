@@ -14,8 +14,8 @@ provider "aws" {
 // Determines if we should use an existing key or not
 // mostly used for testing with existing keys
 locals {
-  create_new_key = var.ec2_key_name == null
-  ec2_key_name   = local.create_new_key ? module.ec2_key.name : var.ec2_key_name
+  create_new_key = var.ec2_key_name == null || var.ec2_key_name == ""
+  ec2_key_name   = local.create_new_key ? module.ec2_key.key_name : var.ec2_key_name
 }
 
 module "vpc" {
@@ -35,6 +35,7 @@ module "vpc" {
 module "ec2_key" {
   source = "./modules/key"
 
+  create   = local.create_new_key
   key_name = "${local.name}_key"
 
   tags = merge(local.required_tags, {
