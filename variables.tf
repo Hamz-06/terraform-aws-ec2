@@ -1,3 +1,26 @@
+# GLOBAL variables REQUIRED
+variable "environment" {
+  description = "The deployment environment (e.g., dev, prod)."
+  type        = string
+
+  validation {
+    condition     = contains(["dev", "prod"], var.environment)
+    error_message = "Environment must be one of: dev, prod."
+  }
+}
+
+variable "application_name" {
+  description = "The name of the application being deployed."
+  type        = string
+
+  validation {
+    condition     = length(var.application_name) >= 2 && length(var.application_name) <= 30
+    error_message = "Project name must be between 2 and 30 characters long."
+  }
+}
+
+
+# EC2 and VPC variables
 variable "region" {
   description = "The AWS region where resources will be created (e.g., us-east-1)."
   type        = string
@@ -28,20 +51,8 @@ variable "private_subnets" {
   type        = list(string)
 }
 
-variable "enable_nat_gateway" {
-  description = "Whether to enable NAT Gateway(s) for private subnets."
-  type        = bool
-  default     = true
-}
-
-variable "single_nat_gateway" {
-  description = "If true, a single NAT Gateway will be created for all AZs."
-  type        = bool
-  default     = true
-}
-
 variable "tags" {
-  description = "A map of tags to apply to all resources (e.g., { ttl = \"200\" })."
+  description = "A map of tags to apply to all resources (e.g., { ttl = \"200\" }). By default environment, application and resource tags are included."
   type        = map(string)
   default     = {}
 }
@@ -63,7 +74,7 @@ variable "instance_type" {
 }
 
 variable "ec2_key_name" {
-  description = "the name of the ec2 key pair to use"
+  description = "the name of the ec2 key pair to use, if no key is provided one will be created"
   type        = string
   default     = null
 }
@@ -90,23 +101,3 @@ variable "security_group_ingress_rules" {
   default = {}
 }
 
-# GLOBAL variables REQUIRED
-variable "environment" {
-  description = "The deployment environment (e.g., dev, prod)."
-  type        = string
-
-  validation {
-    condition     = contains(["dev", "prod"], var.environment)
-    error_message = "Environment must be one of: dev, prod."
-  }
-}
-
-variable "application_name" {
-  description = "The name of the application being deployed."
-  type        = string
-
-  validation {
-    condition     = length(var.application_name) >= 2 && length(var.application_name) <= 30
-    error_message = "Project name must be between 2 and 30 characters long."
-  }
-}

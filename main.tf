@@ -15,7 +15,7 @@ provider "aws" {
 // mostly used for testing with existing keys
 locals {
   create_new_key = var.ec2_key_name == null
-  ec2_key_name   = local.create_new_key ? module.ec2_key[0].key_name : var.ec2_key_name
+  ec2_key_name   = local.create_new_key ? module.ec2_key.name : var.ec2_key_name
 }
 
 module "vpc" {
@@ -48,7 +48,8 @@ module "ec2_instance" {
 
   ami                          = var.ami_id
   instance_type                = var.instance_type
-  subnet_id                    = module.vpc.public_subnets[0]
+  //potentially have it passed in as variable instead of creating it by default
+  subnet_id                    = module.vpc.public_subnets[0] 
   security_group_ids           = [module.vpc.default_security_group_id]
   associate_public_ip_address  = var.associate_public_ip_address
   security_group_ingress_rules = var.security_group_ingress_rules
@@ -58,5 +59,5 @@ module "ec2_instance" {
   tags = merge(local.required_tags, {
     "resource" = "${local.name}_ec2"
   })
-  depends_on = [module.vpc, module.ec2_key]
+  depends_on = [module.vpc]
 }
