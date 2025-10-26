@@ -33,7 +33,7 @@ module "vpc" {
 }
 
 module "ec2_key" {
-  source = "./modules/key"
+  source   = "./modules/key"
   key_name = "${local.name}_key"
 
   tags = merge(local.required_tags, {
