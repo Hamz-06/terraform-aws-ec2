@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v1.1.0...v2.0.0) (2025-10-26)
+
+
+### Features
+
+* create aws_key_pair by default ([815df51](https://github.com/Hamz-06/terraform-aws-ec2/commit/815df51419cb86f5016f923f9dc873692494f9e2))
+
+
+### BREAKING CHANGES
+
+* EC2 key creation is now automatic by default
+
 # [1.1.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v1.0.2...v1.1.0) (2025-10-25)
 
 
