@@ -18,19 +18,6 @@ locals {
   ec2_key_name   = local.create_new_key ? module.ec2_key.key_name : var.ec2_key_name
 }
 
-module "vpc" {
-  source = "./modules/vpc"
-
-  name            = var.vpc_name
-  azs             = var.vpc_azs
-  public_subnets  = var.public_subnets
-  private_subnets = var.private_subnets
-  cidr            = var.vpc_cidr
-
-  tags = merge(local.required_tags, {
-    "resource" = "${local.name}_vpc"
-  })
-}
 
 module "ec2_key" {
   source   = "./modules/key"
@@ -48,8 +35,8 @@ module "ec2_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
   //potentially have it passed in as variable instead of creating it by default
-  subnet_id                    = module.vpc.public_subnets[0]
-  security_group_ids           = [module.vpc.default_security_group_id]
+  subnet_id                    = var.subnet_id
+  security_group_ids           = var.security_group_ids
   associate_public_ip_address  = var.associate_public_ip_address
   security_group_ingress_rules = var.security_group_ingress_rules
 
@@ -58,5 +45,4 @@ module "ec2_instance" {
   tags = merge(local.required_tags, {
     "resource" = "${local.name}_ec2"
   })
-  depends_on = [module.vpc]
 }
