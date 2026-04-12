@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v2.0.0...v3.0.0) (2026-04-12)
+
+
+### Features
+
+* **infra:** remove vpc module ([cbe24b1](https://github.com/Hamz-06/terraform-aws-ec2/commit/cbe24b1f74701928df4d52d35bba75bf13743ee3))
+
+
+### BREAKING CHANGES
+
+* **infra:** VPC module has been removed from infrastructure stack
+
 # [2.0.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v1.1.0...v2.0.0) (2025-10-26)
 
 
