@@ -63,7 +63,7 @@ variable "associate_public_ip_address" {
 variable "subnet_id" {
   description = "Subnet ID where the instance will be deployed."
   type        = string
-  default     = null  
+  default     = null
 }
 
 variable "security_group_ids" {
