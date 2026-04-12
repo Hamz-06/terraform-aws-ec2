@@ -100,3 +100,8 @@ module "ec2_instance" {
 | `BREAKING CHANGE:` | 💥 Major | `BREAKING CHANGE: switch to new S3 backend` |
 
 To add a breaking change, include `BREAKING CHANGE:` in the commit body or footer.
+
+example 
+
+git commit -m "feat(infra): remove vpc module" \
+           -m "BREAKING CHANGE: VPC module has been removed from infrastructure stack"
