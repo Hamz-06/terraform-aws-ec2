@@ -1,0 +1,3 @@
+
+validate terraform 
+--> terraform validate

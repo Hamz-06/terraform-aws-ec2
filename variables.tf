@@ -20,35 +20,10 @@ variable "application_name" {
 }
 
 
-# EC2 and VPC variables
+# EC2 
 variable "region" {
   description = "The AWS region where resources will be created (e.g., us-east-1)."
   type        = string
-}
-
-variable "vpc_name" {
-  description = "The name of the VPC to create."
-  type        = string
-}
-
-variable "vpc_cidr" {
-  description = "The CIDR block for the VPC (e.g., 10.0.0.0/16)."
-  type        = string
-}
-
-variable "vpc_azs" {
-  description = "List of availability zones to use for the VPC (e.g., [\"us-east-1a\", \"us-east-1b\"])."
-  type        = list(string)
-}
-
-variable "public_subnets" {
-  description = "List of CIDR blocks for the public subnets."
-  type        = list(string)
-}
-
-variable "private_subnets" {
-  description = "List of CIDR blocks for the private subnets."
-  type        = list(string)
 }
 
 variable "tags" {
@@ -83,6 +58,18 @@ variable "associate_public_ip_address" {
   description = "Whether to associate a public IP address with the EC2 instance."
   type        = bool
   default     = true
+}
+
+variable "subnet_id" {
+  description = "Subnet ID where the instance will be deployed."
+  type        = string
+  default     = null  
+}
+
+variable "security_group_ids" {
+  description = "List of security group IDs to attach to the instance."
+  type        = list(string)
+  default     = []
 }
 
 variable "security_group_ingress_rules" {
