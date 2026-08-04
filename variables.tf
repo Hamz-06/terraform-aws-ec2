@@ -1,4 +1,10 @@
 # GLOBAL variables REQUIRED
+variable "create" {
+  description = "Whether to create the EC2 instance and associated resources."
+  type        = bool
+  default     = true
+}
+
 variable "environment" {
   description = "The deployment environment (e.g., dev, prod)."
   type        = string
@@ -57,13 +63,12 @@ variable "ec2_key_name" {
 variable "associate_public_ip_address" {
   description = "Whether to associate a public IP address with the EC2 instance."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "subnet_id" {
   description = "Subnet ID where the instance will be deployed."
   type        = string
-  default     = null
 }
 
 variable "security_group_ids" {
@@ -84,6 +89,33 @@ variable "security_group_ingress_rules" {
     referenced_security_group_id = optional(string)
     tags                         = optional(map(string), {})
     to_port                      = optional(number)
+  }))
+  default = {}
+}
+
+variable "user_data" {
+  description = "Shell script to run on instance launch (user data). Use heredoc syntax for multiline scripts."
+  type        = string
+  default     = null
+}
+
+variable "ebs_volumes" {
+  description = "Map of additional EBS volumes to attach to the EC2 instance. Map key is used as the device name if device_name is not set."
+  type = map(object({
+    device_name                    = optional(string)
+    size                           = optional(number)
+    type                           = optional(string, "gp3")
+    iops                           = optional(number)
+    throughput                     = optional(number)
+    encrypted                      = optional(bool, true)
+    kms_key_id                     = optional(string)
+    snapshot_id                    = optional(string)
+    multi_attach_enabled           = optional(bool)
+    final_snapshot                 = optional(bool)
+    force_detach                   = optional(bool)
+    skip_destroy                   = optional(bool)
+    stop_instance_before_detaching = optional(bool)
+    tags                           = optional(map(string), {})
   }))
   default = {}
 }
