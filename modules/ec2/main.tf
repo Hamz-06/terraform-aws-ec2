@@ -3,6 +3,7 @@ module "ec2" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 6.1.4"
 
+  create                       = var.create
   name                         = var.instance_name
   ami                          = var.ami
   instance_type                = var.instance_type
@@ -11,6 +12,8 @@ module "ec2" {
   key_name                     = var.key_name
   associate_public_ip_address  = var.associate_public_ip_address
   security_group_ingress_rules = var.security_group_ingress_rules
+  ebs_volumes                  = var.ebs_volumes
+  user_data                    = var.user_data
 
   tags = var.tags
 }
