@@ -178,6 +178,7 @@ aws ssm get-parameter \
 | `BREAKING CHANGE:` in commit body | Major release |
 
 
+
 ```bash
 # Breaking change example
 git commit -m "feat(ec2): remove auto-generated key pair support" \
