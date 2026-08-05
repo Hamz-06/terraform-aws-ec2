@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v3.0.0...v4.0.0) (2026-08-05)
+
+
+### Features
+
+* **ec2:** make subnet_id required ([7d46892](https://github.com/Hamz-06/terraform-aws-ec2/commit/7d46892fc8df366aa5c1b5927204aaf87c0628cc))
+
+
+### BREAKING CHANGES
+
+* **ec2:** subnet_id no longer optional.
+
 # [3.0.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v2.0.0...v3.0.0) (2026-04-12)
 
 
