@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v4.0.0...v4.1.0) (2026-08-08)
+
+
+### Features
+
+* **ec2:** support custom IAM policy documents for instance role ([2ca15ac](https://github.com/Hamz-06/terraform-aws-ec2/commit/2ca15ac7df981a925154f9dcecee13af94349671))
+
 # [4.0.0](https://github.com/Hamz-06/terraform-aws-ec2/compare/v3.0.0...v4.0.0) (2026-08-05)
 
 
