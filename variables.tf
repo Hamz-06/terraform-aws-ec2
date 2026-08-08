@@ -120,3 +120,16 @@ variable "ebs_volumes" {
   default = {}
 }
 
+variable "iam_policy_json_documents" {
+  description = "Map of IAM policy JSON documents to create and attach to the EC2 instance role. Map key is used in the policy name."
+  type        = map(string)
+  default     = {}
+
+  validation {
+    condition = alltrue([
+      for policy_json in values(var.iam_policy_json_documents) : can(jsondecode(policy_json))
+    ])
+    error_message = "Each value in iam_policy_json_documents must be a valid IAM policy JSON string."
+  }
+}
+

@@ -103,6 +103,38 @@ EOF
 }
 ```
 
+### With custom IAM policy (for EC2 role)
+
+```hcl
+module "ec2" {
+  source = "Hamz-06/ec2/aws"
+
+  environment      = "dev"
+  application_name = "ai-cc"
+  region           = "us-east-1"
+  instance_name    = "ai-worker"
+  ami_id           = "ami-0de87753593ec47fd"
+  subnet_id        = module.vpc.private_subnets[0]
+
+  iam_policy_json_documents = {
+    ssm_parameter_read = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Effect = "Allow"
+          Action = [
+            "ssm:GetParameter",
+            "ssm:GetParameters",
+            "ssm:GetParametersByPath"
+          ]
+          Resource = "arn:aws:ssm:us-east-1:123456789012:parameter/dev/ai-cc/*"
+        }
+      ]
+    })
+  }
+}
+```
+
 ### Disable the instance without removing config
 
 ```hcl
@@ -136,6 +168,7 @@ module "ec2" {
 | `security_group_ingress_rules` | Map of ingress rules to create on the managed security group | `map(object)` | `{}` |
 | `user_data` | Shell script to run on first boot | `string` | `null` |
 | `ebs_volumes` | Map of additional EBS volumes to attach | `map(object)` | `{}` |
+| `iam_policy_json_documents` | Map of IAM policy JSON documents to create and attach to EC2 IAM role | `map(string)` | `{}` |
 | `tags` | Additional tags applied to all resources | `map(string)` | `{}` |
 
 ## Outputs

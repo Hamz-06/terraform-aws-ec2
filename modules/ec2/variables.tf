@@ -85,6 +85,12 @@ variable "user_data" {
   default     = null
 }
 
+variable "iam_policy_json_documents" {
+  description = "Map of IAM policy JSON documents to create and attach to the EC2 instance role"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags to apply to the instance"
   type        = map(string)

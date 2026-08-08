@@ -1,4 +1,19 @@
 # modules/ec2/main.tf
+resource "aws_iam_policy" "ec2_custom" {
+  for_each = var.create ? var.iam_policy_json_documents : {}
+
+  name_prefix = "${var.instance_name}-${each.key}-"
+  description = "Custom policy for ${var.instance_name} (${each.key})"
+  policy      = each.value
+  tags        = var.tags
+}
+
+locals {
+  iam_role_policies = {
+    for name, policy in aws_iam_policy.ec2_custom : name => policy.arn
+  }
+}
+
 module "ec2" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 6.1.4"
@@ -14,6 +29,8 @@ module "ec2" {
   security_group_ingress_rules = var.security_group_ingress_rules
   ebs_volumes                  = var.ebs_volumes
   user_data                    = var.user_data
+  create_iam_instance_profile  = length(local.iam_role_policies) > 0
+  iam_role_policies            = local.iam_role_policies
 
   tags = var.tags
 }

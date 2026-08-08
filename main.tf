@@ -37,6 +37,7 @@ module "ec2_instance" {
   security_group_ingress_rules = var.security_group_ingress_rules
   ebs_volumes                  = var.ebs_volumes
   user_data                    = var.user_data
+  iam_policy_json_documents    = var.iam_policy_json_documents
 
   key_name = local.ec2_key_name
 
